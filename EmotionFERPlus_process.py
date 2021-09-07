@@ -1,54 +1,51 @@
 from ikomia import core, dataprocess
 import copy
-# Your imports below
 import os
 import cv2
 import numpy as np
 
 SAMPLE_SIZE = 64
 
-#--------------------
-#- Class to handle the process parameters
-#- Inherits core.CProtocolTaskParam from Imageez API
-#--------------------
-class EmotionFERPlusProcessParam(core.CProtocolTaskParam):
+# --------------------
+# - Class to handle the process parameters
+# - Inherits core.CProtocolTaskParam from Ikomia API
+# --------------------
+class EmotionFERPlusProcessParam(core.CWorkflowTaskParam):
 
     def __init__(self):
-        core.CProtocolTaskParam.__init__(self)
+        core.CWorkflowTaskParam.__init__(self)
         # Place default value initialization here
         self.update = False
         self.backend = cv2.dnn.DNN_BACKEND_DEFAULT
         self.target = cv2.dnn.DNN_TARGET_CPU
         self.model_path = os.path.dirname(os.path.realpath(__file__)) + "/models/model.onnx"
 
-
-    def setParamMap(self, paramMap):
+    def setParamMap(self, param_map):
         # Set parameters values from Imageez application
         # Parameters values are stored as string and accessible like a python dict
         # Example : self.windowSize = int(paramMap["windowSize"])
         pass
 
-
     def getParamMap(self):
         # Send parameters values to Imageez application
         # Create the specific dict structure (string container)
-        paramMap = core.ParamMap()
+        param_map = core.ParamMap()
         # Example : paramMap["windowSize"] = str(self.windowSize)
-        return paramMap
+        return param_map
 
 
-#--------------------
-#- Class which implements the process
-#- Inherits core.CProtocolTask or derived from Imageez API
-#--------------------
-class EmotionFERPlusProcess(dataprocess.CImageProcess2d):
+# --------------------
+# - Class which implements the process
+# - Inherits core.CProtocolTask or derived from Ikomia API
+# --------------------
+class EmotionFERPlusProcess(dataprocess.C2dImageTask):
 
     def __init__(self, name, param):
-        dataprocess.CImageProcess2d.__init__(self, name)
+        dataprocess.C2dImageTask.__init__(self, name)
         # Add graphics output
         self.addOutput(dataprocess.CGraphicsOutput())
         # Add numeric output
-        self.addOutput(dataprocess.CDblFeatureIO())
+        self.addOutput(dataprocess.CNumericIO())
 
         # Network members
         self.net = None
@@ -164,14 +161,14 @@ class EmotionFERPlusProcess(dataprocess.CImageProcess2d):
         return self.class_names[class_index]
 
 
-#--------------------
-#- Factory class to build process object
-#- Inherits dataprocess.CProcessFactory from Imageez API
-#--------------------
-class EmotionFERPlusProcessFactory(dataprocess.CProcessFactory):
+# --------------------
+# - Factory class to build process object
+# - Inherits dataprocess.CProcessFactory from Ikomia API
+# --------------------
+class EmotionFERPlusProcessFactory(dataprocess.CTaskFactory):
 
     def __init__(self):
-        dataprocess.CProcessFactory.__init__(self)
+        dataprocess.CTaskFactory.__init__(self)
         # Set process information as string here
         self.info.name = "EmotionFERPlus"
         self.info.shortDescription = "Facial emotion recognition using DNN trained from crowd-sourced label distribution."
@@ -190,5 +187,5 @@ class EmotionFERPlusProcessFactory(dataprocess.CProcessFactory):
         self.info.keywords = "face,expression,emotion,dnn"
 
     def create(self, param=None):
-        #Create process object 
+        # Create process object
         return EmotionFERPlusProcess(self.info.name, param)

@@ -1,8 +1,8 @@
 from ikomia import utils, core, dataprocess
-import EmotionFERPlus_process as processMod
+from ikomia.utils import qtconversion
+from EmotionFERPlus.EmotionFERPlus_process import EmotionFERPlusProcessParam
 import cv2
-
-#PyQt GUI framework
+# PyQt GUI framework
 from PyQt5.QtWidgets import *
 
 backend_names = {
@@ -38,19 +38,19 @@ backend_targets = {
 # Class which implements widget associated with the process
 # Inherits core.CProtocolTaskWidget from Ikomia API
 # -------------------
-class EmotionFERPlusWidget(core.CProtocolTaskWidget):
+class EmotionFERPlusWidget(core.CWorkflowTaskWidget):
 
     def __init__(self, param, parent):
-        core.CProtocolTaskWidget.__init__(self, parent)
+        core.CWorkflowTaskWidget.__init__(self, parent)
 
         if param is None:
-            self.param = processMod.EmotionFERPlusProcessParam()
+            self.param = EmotionFERPlusProcessParam()
         else:
             self.param = param
 
         self.param_changed = False
 
-        #Create layout : QGridLayout by default
+        # Create layout : QGridLayout by default
         self.grid_layout = QGridLayout()
 
         # Combobox for inference backend
@@ -73,10 +73,10 @@ class EmotionFERPlusWidget(core.CProtocolTaskWidget):
         self.grid_layout.addWidget(label_target, 1, 0, 1, 1)
         self.grid_layout.addWidget(self.combo_target, 1, 1, 1, 1)
         
-        #PyQt -> Qt wrapping
-        layout_ptr = utils.PyQtToQt(self.grid_layout)
+        # PyQt -> Qt wrapping
+        layout_ptr = qtconversion.PyQtToQt(self.grid_layout)
 
-        #Set widget layout
+        # Set widget layout
         self.setLayout(layout_ptr)
 
     def fill_combo_backend(self):
