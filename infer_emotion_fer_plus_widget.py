@@ -1,6 +1,6 @@
 from ikomia import utils, core, dataprocess
 from ikomia.utils import qtconversion
-from EmotionFERPlus.EmotionFERPlus_process import EmotionFERPlusProcessParam
+from infer_emotion_fer_plus.infer_emotion_fer_plus_process import EmotionFerPlusParam
 import cv2
 # PyQt GUI framework
 from PyQt5.QtWidgets import *
@@ -38,13 +38,13 @@ backend_targets = {
 # Class which implements widget associated with the process
 # Inherits core.CProtocolTaskWidget from Ikomia API
 # -------------------
-class EmotionFERPlusWidget(core.CWorkflowTaskWidget):
+class EmotionFerPlusWidget(core.CWorkflowTaskWidget):
 
     def __init__(self, param, parent):
         core.CWorkflowTaskWidget.__init__(self, parent)
 
         if param is None:
-            self.param = EmotionFERPlusProcessParam()
+            self.param = EmotionFerPlusParam()
         else:
             self.param = param
 
@@ -114,13 +114,13 @@ class EmotionFERPlusWidget(core.CWorkflowTaskWidget):
 # Factory class to build process widget object
 # Inherits dataprocess.CWidgetFactory from Ikomia API
 # -------------------
-class EmotionFERPlusWidgetFactory(dataprocess.CWidgetFactory):
+class EmotionFerPlusWidgetFactory(dataprocess.CWidgetFactory):
 
     def __init__(self):
         dataprocess.CWidgetFactory.__init__(self)
         # Set the name of the process -> it must be the same as the one declared in the process factory class
-        self.name = "EmotionFERPlus"
+        self.name = "infer_emotion_fer_plus"
 
     def create(self, param):
         # Create widget object
-        return EmotionFERPlusWidget(param, None)
+        return EmotionFerPlusWidget(param, None)

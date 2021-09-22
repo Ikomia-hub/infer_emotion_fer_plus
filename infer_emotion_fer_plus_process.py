@@ -10,7 +10,7 @@ SAMPLE_SIZE = 64
 # - Class to handle the process parameters
 # - Inherits core.CProtocolTaskParam from Ikomia API
 # --------------------
-class EmotionFERPlusProcessParam(core.CWorkflowTaskParam):
+class EmotionFerPlusParam(core.CWorkflowTaskParam):
 
     def __init__(self):
         core.CWorkflowTaskParam.__init__(self)
@@ -38,7 +38,7 @@ class EmotionFERPlusProcessParam(core.CWorkflowTaskParam):
 # - Class which implements the process
 # - Inherits core.CProtocolTask or derived from Ikomia API
 # --------------------
-class EmotionFERPlusProcess(dataprocess.C2dImageTask):
+class EmotionFerPlus(dataprocess.C2dImageTask):
 
     def __init__(self, name, param):
         dataprocess.C2dImageTask.__init__(self, name)
@@ -53,7 +53,7 @@ class EmotionFERPlusProcess(dataprocess.C2dImageTask):
 
         # Create parameters class
         if param is None:
-            self.setParam(EmotionFERPlusProcessParam())
+            self.setParam(EmotionFerPlusParam())
         else:
             self.setParam(copy.deepcopy(param))
 
@@ -165,12 +165,12 @@ class EmotionFERPlusProcess(dataprocess.C2dImageTask):
 # - Factory class to build process object
 # - Inherits dataprocess.CProcessFactory from Ikomia API
 # --------------------
-class EmotionFERPlusProcessFactory(dataprocess.CTaskFactory):
+class EmotionFerPlusFactory(dataprocess.CTaskFactory):
 
     def __init__(self):
         dataprocess.CTaskFactory.__init__(self)
         # Set process information as string here
-        self.info.name = "EmotionFERPlus"
+        self.info.name = "infer_emotion_fer_plus"
         self.info.shortDescription = "Facial emotion recognition using DNN trained from crowd-sourced label distribution."
         self.info.description = "Crowd  sourcing  has  become  a  widely  adopted  scheme  tocollect  ground  truth  labels.   However,  it  is  a  well-knownproblem that these labels can be very noisy.  In this paper,we  demonstrate  how  to  learn  a  deep  convolutional  neuralnetwork (DCNN) from noisy labels, using facial expressionrecognition  as  an  example.   More  specifically,  we  have  10taggers  to  label  each  input  image,  and  compare  four  dif-ferent  approaches  to  utilizing  the  multiple  labels:   major-ity voting, multi-label learning, probabilistic label drawing,and cross-entropy loss.  We show that the traditional major-ity voting scheme does not perform as well as the last twoapproaches  that  fully  leverage  the  label  distribution.   Anenhanced FER+ data set with multiple labels for each faceimage will also be shared with the research community."
         # relative path -> as displayed in Imageez application process tree
@@ -188,4 +188,4 @@ class EmotionFERPlusProcessFactory(dataprocess.CTaskFactory):
 
     def create(self, param=None):
         # Create process object
-        return EmotionFERPlusProcess(self.info.name, param)
+        return EmotionFerPlus(self.info.name, param)
