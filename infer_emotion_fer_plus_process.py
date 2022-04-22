@@ -63,7 +63,7 @@ class EmotionFerPlus(dataprocess.C2dImageTask):
             for row in f:
                 self.class_names.append(row[:-1])
 
-    def getProgressSteps(self, eltCount=1):
+    def getProgressSteps(self):
         # Function returning the number of progress steps for this process
         # This is handled by the main progress bar of Imageez application
         return 4
