@@ -1,10 +1,11 @@
-from ikomia import core, dataprocess
+from ikomia import utils, core, dataprocess
 import copy
 import os
 import cv2
 import numpy as np
 
 SAMPLE_SIZE = 64
+
 
 # --------------------
 # - Class to handle the process parameters
@@ -80,7 +81,12 @@ class EmotionFerPlus(dataprocess.C2dImageTask):
         param = self.getParam()
 
         # Load the recognition model from disk
-        if self.net is None or param.update == True:
+        if self.net is None or param.update:
+            if not os.path.exists(param.model_path):
+                print("Downloading model, please wait...")
+                model_url = utils.getModelHubUrl() + "/" + self.name + "/model.onnx"
+                self.download(model_url, param.model_path)
+
             self.net = cv2.dnn.readNet(param.model_path)
             self.net.setPreferableBackend(param.backend)
             self.net.setPreferableTarget(param.target)
@@ -175,7 +181,7 @@ class EmotionFerPlusFactory(dataprocess.CTaskFactory):
         self.info.description = "Crowd  sourcing  has  become  a  widely  adopted  scheme  tocollect  ground  truth  labels.   However,  it  is  a  well-knownproblem that these labels can be very noisy.  In this paper,we  demonstrate  how  to  learn  a  deep  convolutional  neuralnetwork (DCNN) from noisy labels, using facial expressionrecognition  as  an  example.   More  specifically,  we  have  10taggers  to  label  each  input  image,  and  compare  four  dif-ferent  approaches  to  utilizing  the  multiple  labels:   major-ity voting, multi-label learning, probabilistic label drawing,and cross-entropy loss.  We show that the traditional major-ity voting scheme does not perform as well as the last twoapproaches  that  fully  leverage  the  label  distribution.   Anenhanced FER+ data set with multiple labels for each faceimage will also be shared with the research community."
         # relative path -> as displayed in Imageez application process tree
         self.info.path = "Plugins/Python/Face"
-        self.info.version = "1.0.0"
+        self.info.version = "1.1.0"
         self.info.iconPath = "icon/icon.png"
         self.info.authors = "Emad Barsoum, Cha Zhang, Cristian Canton Ferrer and Zhengyou Zhang"
         self.info.article = "Training Deep Networks for Facial Expression Recognitionwith Crowd-Sourced Label Distribution"
