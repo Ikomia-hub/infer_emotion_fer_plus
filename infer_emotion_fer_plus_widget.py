@@ -77,7 +77,7 @@ class EmotionFerPlusWidget(core.CWorkflowTaskWidget):
         layout_ptr = qtconversion.PyQtToQt(self.grid_layout)
 
         # Set widget layout
-        self.setLayout(layout_ptr)
+        self.set_layout(layout_ptr)
 
     def fill_combo_backend(self):
         self.combo_backend.clear()
@@ -99,7 +99,7 @@ class EmotionFerPlusWidget(core.CWorkflowTaskWidget):
     def on_param_changed(self, index):
         self.param_changed = True
 
-    def onApply(self):
+    def on_apply(self):
         # Apply button clicked slot
         # Get parameters from widget
         self.param.update = self.param_changed
@@ -107,7 +107,7 @@ class EmotionFerPlusWidget(core.CWorkflowTaskWidget):
         self.param.target = self.combo_target.currentData()
 
         # Send signal to launch the process
-        self.emitApply(self.param)
+        self.emit_apply(self.param)
 
 
 # -------------------
