@@ -84,7 +84,7 @@ class EmotionFerPlus(dataprocess.C2dImageTask):
         if self.net is None or param.update:
             if not os.path.exists(param.model_path):
                 print("Downloading model, please wait...")
-                model_url = utils.getModelHubUrl() + "/" + self.name + "/model.onnx"
+                model_url = utils.get_model_hub_url() + "/" + self.name + "/model.onnx"
                 self.download(model_url, param.model_path)
 
             self.net = cv2.dnn.readNet(param.model_path)
