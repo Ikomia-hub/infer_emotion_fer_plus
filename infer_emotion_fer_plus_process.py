@@ -128,7 +128,7 @@ class EmotionFerPlus(dataprocess.C2dImageTask):
             items = input_graphics.get_items()
 
             for item in items:
-                if item.getType() == core.GraphicsItem.RECTANGLE:
+                if item.get_type() == core.GraphicsItem.RECTANGLE:
                     x = int(item.x)
                     y = int(item.y)
                     w = int(item.width)
