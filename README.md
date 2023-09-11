@@ -19,10 +19,9 @@
     </a> 
 </p>
 
-Crowd  sourcing  has  become  a  widely  adopted  scheme  tocollect  ground  truth  labels.   However,  it  is  a  well-knownproblem that these labels can be very noisy.  In this paper,we  demonstrate  how  to  learn  a  deep  convolutional  neuralnetwork (DCNN) from noisy labels, using facial expressionrecognition  as  an  example.   More  specifically,  we  have  10taggers  to  label  each  input  image,  and  compare  four  dif-ferent  approaches  to  utilizing  the  multiple  labels:   major-ity voting, multi-label learning, probabilistic label drawing,and cross-entropy loss.  We show that the traditional major-ity voting scheme does not perform as well as the last twoapproaches  that  fully  leverage  the  label  distribution.   Anenhanced FER+ data set with multiple labels for each faceimage will also be shared with the research community.
+Facial expression recognition algorithm.
 
-[Insert illustrative image here. Image must be accessible publicly, in algorithm Github repository for example.
-<img src="images/illustration.png"  alt="Illustrative image" width="30%" height="30%">]
+![example](https://raw.githubusercontent.com/Ikomia-hub/infer_emotion_fer_plus/feat/new_readme/icon/result.jpg)
 
 ## :rocket: Use with Ikomia API
 
@@ -39,17 +38,26 @@ pip install ikomia
 [Change the sample image URL to fit algorithm purpose]
 
 ```python
-import ikomia
 from ikomia.dataprocess.workflow import Workflow
+from ikomia.utils.displayIO import display
 
 # Init your workflow
 wf = Workflow()
 
-# Add algorithm
+# Add face detection algorithm
+face_detector = wf.add_task(name="infer_face_detection_kornia", auto_connect=True)
+
+# Add emotion recognition algorithm
 algo = wf.add_task(name="infer_emotion_fer_plus", auto_connect=True)
 
-# Run on your image  
-wf.run_on(url="example_image.png")
+# Run on your image
+wf.run_on(url="https://raw.githubusercontent.com/Ikomia-hub/infer_emotion_fer_plus/feat/new_readme/icon/example_face.jpg")
+
+# Get graphics
+graphics = algo.get_output(1)
+
+# Display results
+display(algo.get_output(0).get_image_with_graphics(graphics))
 ```
 
 ## :sunny: Use with Ikomia Studio
@@ -60,58 +68,31 @@ Ikomia Studio offers a friendly UI with the same features as the API.
 
 - For additional guidance on getting started with Ikomia Studio, check out [this blog post](https://www.ikomia.ai/blog/how-to-get-started-with-ikomia-studio).
 
-## :pencil: Set algorithm parameters
-
-[Explain each algorithm parameters]
-
-[Change the sample image URL to fit algorithm purpose]
-
-```python
-import ikomia
-from ikomia.dataprocess.workflow import Workflow
-
-# Init your workflow
-wf = Workflow()
-
-# Add algorithm
-algo = wf.add_task(name="infer_emotion_fer_plus", auto_connect=True)
-
-algo.set_parameters({
-    "param1": "value1",
-    "param2": "value2",
-    ...
-})
-
-# Run on your image  
-wf.run_on(url="example_image.png")
-
-```
 
 ## :mag: Explore algorithm outputs
 
 Every algorithm produces specific outputs, yet they can be explored them the same way using the Ikomia API. For a more in-depth understanding of managing algorithm outputs, please refer to the [documentation](https://ikomia-dev.github.io/python-api-documentation/advanced_guide/IO_management.html).
 
 ```python
-import ikomia
 from ikomia.dataprocess.workflow import Workflow
+from ikomia.utils.displayIO import display
 
 # Init your workflow
 wf = Workflow()
 
-# Add algorithm
+# Add face detection algorithm
+face_detector = wf.add_task(name="infer_face_detection_kornia", auto_connect=True)
+
+# Add emotion recognition algorithm
 algo = wf.add_task(name="infer_emotion_fer_plus", auto_connect=True)
 
-# Run on your image  
-wf.run_on(url="example_image.png")
+# Run on your image
+wf.run_on(url="https://raw.githubusercontent.com/Ikomia-hub/infer_emotion_fer_plus/feat/new_readme/icon/example_face.jpg")
 
 # Iterate over outputs
-for output in algo.get_outputs()
+for output in algo.get_outputs():
     # Print information
     print(output)
     # Export it to JSON
     output.to_json()
 ```
-
-## :fast_forward: Advanced usage 
-
-[optional]
