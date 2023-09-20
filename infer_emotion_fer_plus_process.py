@@ -19,7 +19,7 @@ class EmotionFerPlusParam(core.CWorkflowTaskParam):
         self.update = False
         self.backend = cv2.dnn.DNN_BACKEND_DEFAULT
         self.target = cv2.dnn.DNN_TARGET_CPU
-        self.model_path = os.path.dirname(os.path.realpath(__file__)) + "/models/model.onnx"
+        self.model_path = os.path.join(os.path.dirname(os.path.realpath(__file__)) , "models", "model.onnx")
 
     def set_values(self, param_map):
         # Set parameters values from Imageez application
