@@ -178,7 +178,6 @@ class EmotionFerPlusFactory(dataprocess.CTaskFactory):
         # Set process information as string here
         self.info.name = "infer_emotion_fer_plus"
         self.info.short_description = "Facial emotion recognition using DNN trained from crowd-sourced label distribution."
-        self.info.description = "Crowd  sourcing  has  become  a  widely  adopted  scheme  tocollect  ground  truth  labels.   However,  it  is  a  well-knownproblem that these labels can be very noisy.  In this paper,we  demonstrate  how  to  learn  a  deep  convolutional  neuralnetwork (DCNN) from noisy labels, using facial expressionrecognition  as  an  example.   More  specifically,  we  have  10taggers  to  label  each  input  image,  and  compare  four  dif-ferent  approaches  to  utilizing  the  multiple  labels:   major-ity voting, multi-label learning, probabilistic label drawing,and cross-entropy loss.  We show that the traditional major-ity voting scheme does not perform as well as the last twoapproaches  that  fully  leverage  the  label  distribution.   Anenhanced FER+ data set with multiple labels for each faceimage will also be shared with the research community."
         # relative path -> as displayed in Imageez application process tree
         self.info.path = "Plugins/Python/Face"
         self.info.version = "1.2.0"
@@ -189,7 +188,8 @@ class EmotionFerPlusFactory(dataprocess.CTaskFactory):
         self.info.year = 2016
         self.info.license = "MIT License"
         self.info.documentation_link = "https://arxiv.org/pdf/1608.01041.pdf"
-        self.info.repository = "https://github.com/microsoft/FERPlus"
+        self.info.repository = "https://github.com/Ikomia-hub/infer_emotion_fer_plus"
+        self.info.original_repository = "https://github.com/microsoft/FERPlus"
         self.info.keywords = "face,expression,emotion,dnn"
 
     def create(self, param=None):
