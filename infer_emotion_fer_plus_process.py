@@ -191,6 +191,8 @@ class EmotionFerPlusFactory(dataprocess.CTaskFactory):
         self.info.repository = "https://github.com/Ikomia-hub/infer_emotion_fer_plus"
         self.info.original_repository = "https://github.com/microsoft/FERPlus"
         self.info.keywords = "face,expression,emotion,dnn"
+        self.info.algo_type = core.AlgoType.INFER
+        self.info.algo_tasks = "CLASSIFICATION"
 
     def create(self, param=None):
         # Create process object
