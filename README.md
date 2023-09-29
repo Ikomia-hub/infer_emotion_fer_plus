@@ -21,7 +21,7 @@
 
 Facial expression recognition algorithm.
 
-![example](https://raw.githubusercontent.com/Ikomia-hub/infer_emotion_fer_plus/feat/new_readme/icon/result.jpg)
+![example](https://raw.githubusercontent.com/Ikomia-hub/infer_emotion_fer_plus/main/icon/result.jpg)
 
 ## :rocket: Use with Ikomia API
 
@@ -49,7 +49,7 @@ face_detector = wf.add_task(name="infer_face_detection_kornia", auto_connect=Tru
 algo = wf.add_task(name="infer_emotion_fer_plus", auto_connect=True)
 
 # Run on your image
-wf.run_on(url="https://raw.githubusercontent.com/Ikomia-hub/infer_emotion_fer_plus/feat/new_readme/icon/example_face.jpg")
+wf.run_on(url="https://raw.githubusercontent.com/Ikomia-hub/infer_emotion_fer_plus/main/icon/example_face.jpg")
 
 # Get graphics
 graphics = algo.get_output(1)
@@ -85,7 +85,7 @@ face_detector = wf.add_task(name="infer_face_detection_kornia", auto_connect=Tru
 algo = wf.add_task(name="infer_emotion_fer_plus", auto_connect=True)
 
 # Run on your image
-wf.run_on(url="https://raw.githubusercontent.com/Ikomia-hub/infer_emotion_fer_plus/feat/new_readme/icon/example_face.jpg")
+wf.run_on(url="https://raw.githubusercontent.com/Ikomia-hub/infer_emotion_fer_plus/main/icon/example_face.jpg")
 
 # Iterate over outputs
 for output in algo.get_outputs():
